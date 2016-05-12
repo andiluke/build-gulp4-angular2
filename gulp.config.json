@@ -1,0 +1,7 @@
+{
+	"paths" : {
+		"appTS" : ["src/**/*.ts", "!node_modules/**/*.*"],
+		"appJS" : "src",
+		"appCSS" : ["src/**/*.scss", "!node_modules/**/*.*"]
+	}
+}
