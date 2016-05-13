@@ -58,6 +58,10 @@ gulp.task('webserver', function() {
 
 // TODO: add Angular
 
+// TODO: build task for starting up
+
+// TODO: combo task to build, watch, serve
+
 
 
 // ALSO: https://github.com/rasenplanscher/gulp-file-structure/blob/master/gulpfile.js
