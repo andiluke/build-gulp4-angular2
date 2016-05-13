@@ -11,12 +11,10 @@ gulp.task('default', function() {
 });
 
 var tsCompile = function tsCompileF() {
-	var tsResult = tsProject.src(config.paths.appTS) // load all files from our pathspecification
+	var tsResult = tsProject.src(config.paths.js.source) // load all files from our pathspecification
         .pipe(ts(tsProject)); // transpile the files into .js
     
-    return tsResult.js.pipe(gulp.dest(function(file) {
-	    	return file.base; // because of Angular 2's encapsulation, it's natural to save the css where the scss-file was
-	    })); // save the .js in the same place as the original .ts-file
+    return tsResult.js.pipe(gulp.dest(config.paths.js.dest)); // save the .js in the same place as the original .ts-file
 };
 
 gulp.task('typescript', tsCompile);
@@ -24,12 +22,10 @@ gulp.task('typescript', tsCompile);
 
 
 var sassCompile = function() {
-	return gulp.src(config.paths.appCSS)
+	return gulp.src(config.paths.css.source)
 		.pipe(sass().on('error', sass.logError)) // this will prevent our future watch-task from crashing on sass-errors
 	    .pipe(minifyCss({compatibility: 'ie10'})) // see the gulp-sass doc for more information on compatibilitymodes
-	    .pipe(gulp.dest(function(file) {
-	    	return file.base; // because of Angular 2's encapsulation, it's natural to save the css where the scss-file was
-	    }));
+	    .pipe(gulp.dest(config.paths.css.dest));
 };
 
 gulp.task('sass', sassCompile);
@@ -37,11 +33,11 @@ gulp.task('sass', sassCompile);
 
 
 gulp.task('watch', function(){
-	var tsWatcher = gulp.watch(config.paths.appTS, tsCompile)
+	var tsWatcher = gulp.watch(config.paths.js.source, tsCompile)
 		.on('change', function(path, stats){
 			console.log('TS File Changed: ' + path);
 		});
-	var sassWatcher = gulp.watch(config.paths.appCSS, sassCompile)
+	var sassWatcher = gulp.watch(config.paths.css.source, sassCompile)
 		.on('change', function(path, stats){
 			console.log('Sass File Changed: ' + path);
 		});

@@ -1,7 +1,13 @@
 {
 	"paths" : {
-		"appTS" : ["src/**/*.ts", "!node_modules/**/*.*"],
-		"appJS" : "src",
-		"appCSS" : ["src/**/*.scss", "!node_modules/**/*.*"]
+		"js" : {
+			"source" : ["src/**/*.ts", "!node_modules/**/*.*"],
+			"dest" : "build/"
+		}, 
+		"css" : {
+			"source" : ["src/**/*.scss", "!node_modules/**/*.*"],
+			"dest" : "build/"
+		}
+
 	}
 }
