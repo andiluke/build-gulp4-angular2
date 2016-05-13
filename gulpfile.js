@@ -4,6 +4,7 @@ var config = require('./gulp.config.json');
 var tsProject = ts.createProject('tsconfig.json');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
+var server = require('gulp-server-livereload');
 
 gulp.task('default', function() {
 	console.log('hello');
@@ -44,7 +45,18 @@ gulp.task('watch', function(){
 });
 
 
-// TODO: finish following directions: http://www.angular.rocks/Angular2-Gulp-Workflow/
+gulp.task('webserver', function() {
+	gulp.src(config.paths.web)
+		.pipe(server({
+			livereload: {
+				enable: true	
+			},
+			defaultFile: 'index.html',
+			open: true
+		}));
+});
+
+// TODO: add Angular
 
 
 

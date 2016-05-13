@@ -10,7 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-cli": "github:gulpjs/gulp-cli#4.0"
+    "gulp-cli": "github:gulpjs/gulp-cli#4.0",
+    "gulp-server-livereload": "^1.7.4"
   },
   "dependencies": {
     "gulp-minify-css": "^1.2.4",
