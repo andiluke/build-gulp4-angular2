@@ -1,14 +1,14 @@
 {
 	"paths" : {
 		"js" : {
-			"source" : ["src/**/*.ts", "!node_modules/**/*.*"],
-			"dest" : "build/"
+			"source" : ["app/**/*.ts", "!node_modules/**/*.*"],
+			"dest" : "app/"
 		}, 
 		"css" : {
-			"source" : ["src/**/*.scss", "!node_modules/**/*.*"],
-			"dest" : "build/"
+			"source" : ["app/**/*.scss", "!node_modules/**/*.*"],
+			"dest" : "app/"
 		},
-		"web" : "build/"
+		"web" : "./"
 
 	}
 }

@@ -15,7 +15,7 @@ var tsCompile = function tsCompileF() {
 	var tsResult = tsProject.src(config.paths.js.source) // load all files from our pathspecification
         .pipe(ts(tsProject)); // transpile the files into .js
     
-    return tsResult.js.pipe(gulp.dest(config.paths.js.dest)); // save the .js in the same place as the original .ts-file
+    return tsResult.js.pipe(gulp.dest(config.paths.js.dest)); 
 };
 
 gulp.task('typescript', tsCompile);
@@ -56,11 +56,12 @@ gulp.task('webserver', function() {
 		}));
 });
 
-// TODO: add Angular
 
 // TODO: build task for starting up
 
 // TODO: combo task to build, watch, serve
+
+// TODO: clean
 
 
 
