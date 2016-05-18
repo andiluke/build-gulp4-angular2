@@ -71,7 +71,7 @@ gulp.task('clean', function(done) {
 });
 
 
-// TODO: build task for starting up
+gulp.task('build', gulp.parallel(sassCompile, tsCompile));
 
 // TODO: combo task to clean, build, watch, serve
 
