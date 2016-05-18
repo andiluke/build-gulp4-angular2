@@ -5,6 +5,7 @@ var tsProject = ts.createProject('tsconfig.json');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var server = require('gulp-server-livereload');
+var del = require('del');
 
 gulp.task('default', function() {
 	console.log('hello');
@@ -61,12 +62,21 @@ gulp.task('webserver', function() {
 		}));
 });
 
+gulp.task('clean', function(done) {
+	console.log('cleaning!');
+	del([config.paths.js.dest + '*.js', config.paths.css.dest + '*.css']).then(paths => {
+		console.log('Deleted files and folders:\n', paths.join('\n'));
+		done();
+	});
+});
+
 
 // TODO: build task for starting up
 
-// TODO: combo task to build, watch, serve
+// TODO: combo task to clean, build, watch, serve
 
-// TODO: clean
+
+
 
 
 

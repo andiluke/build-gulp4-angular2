@@ -2,11 +2,11 @@
 	"paths" : {
 		"js" : {
 			"source" : ["app/**/*.ts", "!node_modules/**/*.*"],
-			"dest" : "app/"
+			"dest" : "dist/"
 		}, 
 		"css" : {
 			"source" : ["app/**/*.scss", "!node_modules/**/*.*"],
-			"dest" : "app/"
+			"dest" : "dist/"
 		},
 		"web" : "./"
 
