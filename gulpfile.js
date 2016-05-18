@@ -7,34 +7,23 @@ var minifyCss = require('gulp-minify-css');
 var server = require('gulp-server-livereload');
 var del = require('del');
 
-gulp.task('default', function() {
-	console.log('hello');
-	console.log(config.paths.appTS);
-});
-
-var tsCompile = function tsCompileF() {
+var tsCompile = function tsCompile() {
 	var tsResult = tsProject.src(config.paths.js.source) // load all files from our pathspecification
         .pipe(ts(tsProject)); // transpile the files into .js
     
     return tsResult.js.pipe(gulp.dest(config.paths.js.dest)); 
 };
 
-gulp.task('typescript', tsCompile);
 
-
-
-var sassCompile = function() {
+var sassCompile = function sassCompile() {
 	return gulp.src(config.paths.css.source)
 		.pipe(sass().on('error', sass.logError)) // this will prevent our future watch-task from crashing on sass-errors
 	    .pipe(minifyCss({compatibility: 'ie10'})) // see the gulp-sass doc for more information on compatibilitymodes
 	    .pipe(gulp.dest(config.paths.css.dest));
 };
 
-gulp.task('sass', sassCompile);
 
-
-
-gulp.task('watch', function(){
+var watch = function watch(){
 	var tsWatcher = gulp.watch(config.paths.js.source, tsCompile)
 		.on('change', function(path, stats){
 			console.log('TS File Changed: ' + path);
@@ -43,10 +32,10 @@ gulp.task('watch', function(){
 		.on('change', function(path, stats){
 			console.log('Sass File Changed: ' + path);
 		});
-});
+};
 
 
-gulp.task('webserver', function() {
+var webserver = function webserver() {
 	gulp.src(config.paths.web)
 		.pipe(server({
 			livereload: {
@@ -60,27 +49,27 @@ gulp.task('webserver', function() {
 			defaultFile: 'index.html',
 			open: true
 		}));
-});
+};
 
-gulp.task('clean', function(done) {
+var clean = function clean (done) {
 	console.log('cleaning!');
 	del([config.paths.js.dest + '*.js', config.paths.css.dest + '*.css']).then(paths => {
 		console.log('Deleted files and folders:\n', paths.join('\n'));
 		done();
 	});
-});
+};
 
 
-gulp.task('build', gulp.parallel(sassCompile, tsCompile));
-
-// TODO: combo task to clean, build, watch, serve
-gulp.task('go', gulp.series(
-	'clean',
-	'build',
-	gulp.parallel('watch', 'webserver')
-));
+var build = gulp.parallel(sassCompile, tsCompile);
 
 
+var go = gulp.series(
+	clean,
+	build,
+	gulp.parallel(watch, webserver)
+);
+
+gulp.task('default', go);
 
 
 
