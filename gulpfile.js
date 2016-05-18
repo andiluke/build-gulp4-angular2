@@ -49,7 +49,12 @@ gulp.task('webserver', function() {
 	gulp.src(config.paths.web)
 		.pipe(server({
 			livereload: {
-				enable: true	
+				enable: true,
+				filter: function(filePath, cb) { // this function tells livereload what to ignore
+		          cb( !(/node_modules/.test(filePath)) &&  // ignore anything in node_modules
+		              !(/.*ts$/.test(filePath)) && // ignore changes to *.ts-files
+		              !(/gulpfile.js$/.test(filePath)) ); // ignore changes to gulpfile.js
+		        }	
 			},
 			defaultFile: 'index.html',
 			open: true
